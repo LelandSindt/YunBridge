@@ -32,6 +32,8 @@ import time
 import packet
 from packet import cbreak
 
+import os 
+
 class CommandProcessor:
   def __init__(self):
     self.commands = { }
@@ -70,8 +72,12 @@ processes.init(cp)
 import console
 console.init(cp)
 
-import mailbox
-mailbox.init(cp)
+if os.path.isdir('/mnt/sd/arduino/bridge/'):
+  import mailbox_dbm as mailbox
+  mailbox.init(cp)
+else:
+  import mailbox
+  mailbox.init(cp)
 
 import files
 files.init(cp)
